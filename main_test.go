@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test(t *testing.T) {
+func TestSQLIntegrationT(t *testing.T) {
 	var db *sql.DB
 	var count uint8
 	var res string
@@ -18,11 +18,14 @@ func Test(t *testing.T) {
 	}
 
 	if err := getUserFromNumber(db, count, &res); res == "" {
-		t.Errorf("error getting user:%s\n", err)
+		t.Fatalf("error getting user:%s\n", err)
 	}
 
 	if res == "" {
 		t.Fatalf("got user is nil\n")
 	}
 
+	if err := insertToTable(db, "ozangg", "05462507982", "11FF", "ROBO"); err != nil {
+		t.Fatalf("err occured while inserting to table: %s\n", err)
+	}
 }
