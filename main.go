@@ -7,6 +7,7 @@ import (
 	"robotik/dbM"
 	"robotik/handlers"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
@@ -14,6 +15,10 @@ import (
 var router *gin.Engine = gin.Default()
 
 func main() {
+	c := cors.DefaultConfig()
+	c.AllowAllOrigins = true
+	router.Use(cors.New(c))
+
 	var db *sql.DB
 	var count uint8
 	if err := dbM.InitializeSQL(&db, &count); err != nil {
