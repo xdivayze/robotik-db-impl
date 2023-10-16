@@ -33,5 +33,5 @@ func main() {
 	}()
 
 	handlers.InitializeHandlers(router, db)
-	router.Run("127.0.0.1:6471")
+	router.RunTLS(":6471","/etc/letsencrypt/live/meral.club/fullchain.pem","/etc/letsencrypt/live/meral.club/privkey.pem")
 }
